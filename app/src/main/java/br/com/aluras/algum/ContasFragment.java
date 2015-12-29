@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.GridView;
 
 
 /**
@@ -23,8 +25,20 @@ public class ContasFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contas, container, false);
+        View rootView =  inflater.inflate(R.layout.fragment_contas, container, false);
+
+        String[] contas = new String[]{"Banco do Brasil", "Caixa", "Carteira Andre", "VR Adriana", "texto muito grande para ver no que da"};
+
+        GridView grid = (GridView)rootView.findViewById(R.id.grid_contas);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.item_conta, R.id.txt_conta_nome, contas);
+
+        grid.setAdapter(adapter);
+
+        return rootView;
     }
+
+
 
 
 }
