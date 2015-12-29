@@ -27,7 +27,11 @@ public class ContasFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView =  inflater.inflate(R.layout.fragment_contas, container, false);
 
-        String[] contas = new String[]{"Banco do Brasil", "Caixa", "Carteira Andre", "VR Adriana", "texto muito grande para ver no que da"};
+        String[] contas = new String[]{"Banco do Brasil", "Caixa", "Carteira Andre", "VR Adriana", "texto muito grande para ver no que da","Banco do Brasil", "Caixa", "Carteira Andre", "VR Adriana", "texto muito grande para ver no que da","Banco do Brasil", "Caixa", "Carteira Andre", "VR Adriana", "texto muito grande para ver no que da","Banco do Brasil", "Caixa", "Carteira Andre", "VR Adriana", "texto muito grande para ver no que da","Banco do Brasil", "Caixa", "Carteira Andre", "VR Adriana", "texto muito grande para ver no que da","Banco do Brasil", "Caixa", "Carteira Andre", "VR Adriana", "texto muito grande para ver no que da","Banco do Brasil", "Caixa", "Carteira Andre", "VR Adriana", "texto muito grande para ver no que da","Banco do Brasil", "Caixa", "Carteira Andre", "VR Adriana", "texto muito grande para ver no que da","Banco do Brasil", "Caixa", "Carteira Andre", "VR Adriana", "texto muito grande para ver no que da","Banco do Brasil", "Caixa", "Carteira Andre", "VR Adriana", "texto muito grande para ver no que da","Banco do Brasil", "Caixa", "Carteira Andre", "VR Adriana", "texto muito grande para ver no que da","Banco do Brasil", "Caixa", "Carteira Andre", "VR Adriana", "texto muito grande para ver no que da","Banco do Brasil", "Caixa", "Carteira Andre", "VR Adriana", "texto muito grande para ver no que da","Banco do Brasil", "Caixa", "Carteira Andre", "VR Adriana", "texto muito grande para ver no que da","Banco do Brasil", "Caixa", "Carteira Andre", "VR Adriana", "texto muito grande para ver no que da"};
+
+        //AlgumSyncAdapter.syncImmediately(getActivity());
+        ContasTask task = new ContasTask();
+        task.execute();
 
         GridView grid = (GridView)rootView.findViewById(R.id.grid_contas);
 
