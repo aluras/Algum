@@ -7,8 +7,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.Authenticator;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.PasswordAuthentication;
 import java.net.URL;
 
 /**
@@ -17,7 +19,8 @@ import java.net.URL;
 public class ContasTask extends AsyncTask<Void,Void,Void> {
     @Override
     protected Void doInBackground(Void... params) {
-        final String URL_CONTAS ="http://localhost:81/FinancasPessoais/contas/listar.json";
+        //final String URL_CONTAS ="http://10.0.2.2:81/FinancasPessoais/contas/listar.json"; //Emulador
+        final String URL_CONTAS ="http://10.190.236.51:81/FinancasPessoais/contas/listar.json"; // Máquina SENAI
 
         // These two need to be declared outside the try/catch
         // so that they can be closed in the finally block.
@@ -25,12 +28,15 @@ public class ContasTask extends AsyncTask<Void,Void,Void> {
         BufferedReader reader = null;
 
         try {
+            Authenticator.setDefault(new MyAuthenticator());
+
             Uri builtUri = Uri.parse(URL_CONTAS).buildUpon().build();
 
             URL url = new URL(builtUri.toString());
 
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
+
             urlConnection.connect();
 
             // Read the input stream into a String
@@ -61,8 +67,23 @@ public class ContasTask extends AsyncTask<Void,Void,Void> {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            urlConnection.disconnect();
         }
         return null;
+    }
+
+
+    static final String kuser = "andrelrs80@gmail.com"; // your account name
+    static final String kpass = "ingles"; // your password for the account
+
+    static class MyAuthenticator extends Authenticator {
+        public PasswordAuthentication getPasswordAuthentication() {
+            // I haven't checked getRequestingScheme() here, since for NTLM
+            // and Negotiate, the usrname and password are all the same.
+            System.err.println("Feeding username and password for " + getRequestingScheme());
+            return (new PasswordAuthentication(kuser, kpass.toCharArray()));
+        }
     }
 
 }
